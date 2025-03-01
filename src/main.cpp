@@ -1,13 +1,15 @@
 #include "app-window.h"
+#include <iostream>
 
-int main(int argc, char **argv)
-{
-    auto ui = AppWindow::create();
+int main(int argc, char **argv) {
+  auto ui = AppWindow::create();
 
-    ui->on_request_increase_value([&]{
-        ui->set_counter(ui->get_counter() + 1);
-    });
+  const auto global_1 = &ui->global<Global_1>();
+  const auto global_2 = &ui->global<Global_2>();
 
-    ui->run();
-    return 0;
+  std::cout << "Global_1 address: " << global_1 << std::endl;
+  std::cout << "Global_2 address: " << global_2 << std::endl;
+
+  ui->run();
+  return 0;
 }
